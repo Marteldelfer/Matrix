@@ -6,6 +6,16 @@ matrix_ = [[2],
            [1],
            [3]]
 
+def mult_list(list: list, mult: int):
+    return [mult * i for i in list]
+
+def subt_list(list1: list, list2: list):
+    return [list1[i] - list2[i] for i in range(len(list1))]
+
+def print_matrix(m):
+    for i in m:
+        print(i)
+
 def determinant(matrix: list):
     """
     Returns determinant of matrix. 
@@ -38,13 +48,7 @@ def matrix_sum(matrix1: list, matrix2: list):
 
     return new_matrix
 
-def mult_list(list: list, mult: int):
-    return [mult * i for i in list]
-
-def subt_list(list1: list, list2: list):
-    return [list1[i] - list2[i] for i in range(len(list1))]
-
-def solve_matrix(matrix1: list, matrix2: list):
+def galsian_elimination(matrix1: list, matrix2: list):
 
     for i in range(len(matrix1)):
         prev_matrix = matrix1
@@ -63,5 +67,13 @@ def solve_matrix(matrix1: list, matrix2: list):
         matrix2[i] = mult_list(matrix2[i], 1 / matrix1[i][i])
 
     return matrix2
+
+def inverse(matrix : list):
+    
+    identity = [[0 for i in range(len(matrix))] for i in range(len(matrix))]
+    for i in range(len(identity)):
+        identity[i][i] = 1
+        
+    return galsian_elimination(matrix, identity)
                 
-print(solve_matrix(matrix, matrix_))
+print_matrix(inverse(matrix))
